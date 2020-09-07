@@ -8,6 +8,7 @@
     * [Sudoku](#sudoku)
 * [Logic](#logic)
 * [Conclusion](#Conclusion)
+
 ## Description
 
 This is my second iteration of a sudoku-solving algorithm. The first was mainly a practical exercise in learning python and solved the puzzles using a combination of brute force, constraint satisfaction and recursive backtracking. 
