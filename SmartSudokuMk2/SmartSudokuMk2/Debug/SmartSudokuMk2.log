@@ -1,0 +1,11 @@
+﻿  Cell.cpp
+  Source.cpp
+  Sudoku.cpp
+D:\Dev\SmartSudoku\SmartSudokuMk2\SmartSudokuMk2\SmartSudokuMk2\Sudoku.cpp(315,28): warning C4267: '=': conversion from 'size_t' to 'short', possible loss of data
+D:\Dev\SmartSudoku\SmartSudokuMk2\SmartSudokuMk2\SmartSudokuMk2\Sudoku.cpp(323,28): warning C4267: '=': conversion from 'size_t' to 'short', possible loss of data
+D:\Dev\SmartSudoku\SmartSudokuMk2\SmartSudokuMk2\SmartSudokuMk2\Sudoku.cpp(331,33): warning C4267: '=': conversion from 'size_t' to 'short', possible loss of data
+D:\Dev\SmartSudoku\SmartSudokuMk2\SmartSudokuMk2\SmartSudokuMk2\Sudoku.cpp(360,47): warning C4267: '=': conversion from 'size_t' to 'short', possible loss of data
+D:\Dev\SmartSudoku\SmartSudokuMk2\SmartSudokuMk2\SmartSudokuMk2\Sudoku.cpp(352,8): warning C4101: 'bestOption': unreferenced local variable
+  Generating Code...
+D:\Dev\SmartSudoku\SmartSudokuMk2\SmartSudokuMk2\SmartSudokuMk2\Cell.cpp(67): warning C4715: 'Cell::FindPossibleValue': not all control paths return a value
+  SmartSudokuMk2.vcxproj -> D:\Dev\SmartSudoku\SmartSudokuMk2\SmartSudokuMk2\Debug\SmartSudokuMk2.exe
