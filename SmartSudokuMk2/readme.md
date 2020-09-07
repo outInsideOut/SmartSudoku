@@ -80,14 +80,14 @@ There are some complicated and unique data structures inside these classes that 
 
 <h4 style="text-align:center; "><u>Top-Level Logic</u></h4>
 <p style="text-align:center; width: 50%; position: relative; left: 25%">This level of logic shows how the sudoku puzzle is solved without any of the smaller considerations or conditions regarding which values will be enetered into a cell, only condiering the top-level functions</p>
-<a style="padding-left:calc(50% - 327px)" data-flickr-embed="true" href="https://www.flickr.com/photos/190027932@N07/50315654056/in/dateposted-public/" title="AllLogic"><img src="https://live.staticflickr.com/65535/50315654056_efd1b12ce5_c.jpg" width="654" height="771" alt="AllLogic"></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
+<a style="padding-left:calc(50% - 327px)" data-flickr-embed="true" href="https://www.flickr.com/photos/190027932@N07/50315654056/in/dateposted-public/" title="AllLogic"><img src="https://live.staticflickr.com/65535/50315654056_efd1b12ce5_c.jpg" width="654" height="771" alt="AllLogic"></a>
 <br><br><br>
 <h4 style="text-align:center; "><u>Lower-Level Logic</u></h4>
 <p style="text-align:center; width: 50%; position: relative; left: 25%">This level of logic shows how decisions are made within the level above usch as Finding the cell with the smallest number of options, estimating, and backtracking</p>
 
-<a style="padding-left:calc(50% - 360px)" data-flickr-embed="true" href="https://www.flickr.com/photos/190027932@N07/50315682191/in/dateposted-public/" title="FindNextCell"><img src="https://live.staticflickr.com/65535/50315682191_e2693a00e8_o.png" width="711" height="1161" alt="FindNextCell"></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
+<a style="padding-left:calc(50% - 360px)" data-flickr-embed="true" href="https://www.flickr.com/photos/190027932@N07/50315682191/in/dateposted-public/" title="FindNextCell"><img src="https://live.staticflickr.com/65535/50315682191_e2693a00e8_o.png" width="711" height="1161" alt="FindNextCell"></a>
 
-<a style="padding-left:calc(50% - 335px)" data-flickr-embed="true" href="https://www.flickr.com/photos/190027932@N07/50315699346/in/dateposted-public/" title="backtrack"><img src="https://live.staticflickr.com/65535/50315699346_978743ed9a_o.png" width="671" height="891" alt="backtrack"></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
+<a style="padding-left:calc(50% - 335px)" data-flickr-embed="true" href="https://www.flickr.com/photos/190027932@N07/50315699346/in/dateposted-public/" title="backtrack"><img src="https://live.staticflickr.com/65535/50315699346_978743ed9a_o.png" width="671" height="891" alt="backtrack"></a>
 
 All logic within the program is well commented in the C++ code, these flowcharts are only to help visualise the more complex elements. 
 
