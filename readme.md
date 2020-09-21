@@ -7,6 +7,7 @@
     * [Cell](#cell)
     * [Sudoku](#sudoku)
 * [Logic](#logic)
+* [Version Control](#version-control)
 * [Conclusion](#Conclusion)
 ## Description
 
@@ -91,6 +92,18 @@ There are some complicated and unique data structures inside these classes that 
 <a style="padding-left:calc(50% - 335px)" data-flickr-embed="true" href="https://www.flickr.com/photos/190027932@N07/50315699346/in/dateposted-public/" title="backtrack"><img src="https://live.staticflickr.com/65535/50315699346_978743ed9a_o.png" width="671" height="891" alt="backtrack"></a>
 
 All logic within the program is well commented in the C++ code, these flowcharts are only to help visualise the more complex elements. 
+
+## Version Control
+
+### v 1.0.1
+
+Some automatic casting written into the program. e.g:
+
+    length = cols[i].size(); ====> length = short(cols[i].size());
+
+### v 1.0.0
+
+Initial commit of project. Fully functional. Optimisation potentials present
 
 ## Conclusion
 

@@ -27,7 +27,7 @@ public:
 	std::vector<std::vector<Cell*>>path;
 
 
-	Sudoku(char input[][9]);
+	Sudoku(char input[9][9]);
 	//prints sudoku
 	void PrintSudoku();
 

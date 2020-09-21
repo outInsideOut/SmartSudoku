@@ -1,7 +1,7 @@
 #include "Sudoku.h"
 
 
-Sudoku::Sudoku(char input[][9]) {
+Sudoku::Sudoku(char input[9][9]) {
 
 	for (short i = 0; i < 9; i++) {
 
@@ -43,6 +43,11 @@ Sudoku::Sudoku(char input[][9]) {
 			}
 			short ThreesIndex = rowStart + col;
 			currCell->setThreex3Index(&ThreesIndex);
+
+			//Cell* smallestOptions is consciously left uninitialised
+			//this is as it will have a cell assigned to it as a pointer, rather than it being dynamic memory
+			//initialising now would be uneeded work (memory allocation & construction) for this variable's use
+
 		}
 
 	}
@@ -133,7 +138,7 @@ void Sudoku::FillCell(Cell* cellIn, char c) {
 
 	//update the estiamations path for potential, future backtracking
 	if (estimating == true) {
-		path[estimateDepth - 1].push_back(cellIn);
+		path[long long (estimateDepth) - 1].push_back(cellIn);
 	}
 	//update relevant
 	FindImpossibleValues(cellIn);
@@ -312,7 +317,7 @@ Cell* Sudoku::FindNextCell() {
 	for (int j = 0; j < 3; j++) {
 		for (int i = 0; i < 9; i++) {
 			if (j == 0) {
-				length = cols[i].size();
+				length = short(cols[i].size());
 				if (length == 8) {
 					type = 'c';
 					index = i;
@@ -320,7 +325,7 @@ Cell* Sudoku::FindNextCell() {
 				}
 			}
 			else if (j == 1) {
-				length = rows[i].size();
+				length = short(rows[i].size());
 				if (length == 8) {
 					type = 'r';
 					index = i;
@@ -328,7 +333,7 @@ Cell* Sudoku::FindNextCell() {
 				}
 			}
 			else if (j == 2) {
-				length = threeBy3s[i].size();
+				length = short(threeBy3s[i].size());
 				if (length == 8) {
 					type = 't';
 					index = i;
@@ -349,7 +354,7 @@ Cell* Sudoku::FindNextCell() {
 		}
 		return tempCell;
 	}
-	Cell* bestOption;
+	
 	smallestOptionsSize = 0;
 	
 	for (short i = 0; i < 9; i++) {
@@ -357,7 +362,7 @@ Cell* Sudoku::FindNextCell() {
 			tempCell = &grid[i][j];
 			if (tempCell->value == '0') {
 				
-				length = tempCell->impossibleValues.size();
+				length = short(tempCell->impossibleValues.size());
 
 				if (length == 8) {
 					return tempCell;
@@ -520,7 +525,7 @@ void Sudoku::Backtrack(Cell* cellIn) {
 
 	if (cellIn->value == '0') {
 		EmptyCell(cellIn);
-		it = path[estimateDepth - 1].end();
+		it = path[long long (estimateDepth) - 1].end();
 		it -= 1;
 		Cell* cellPtr = *it;
 		Backtrack(cellPtr);
@@ -540,10 +545,13 @@ void Sudoku::Backtrack(Cell* cellIn) {
 				return;
 			}
 			else {
+				if (path.size() == 1) {
+					//throw impossiblePuzzle exception
+				}
 				EmptyCell(cellIn);
 				path.pop_back();
 				estimateDepth -= 1;
-				it = path[estimateDepth - 1].end();
+				it = path[long long (estimateDepth) - 1].end();
 				it -= 1;
 				Cell* cellPtr = *it;
 				Backtrack(cellPtr);
@@ -552,8 +560,8 @@ void Sudoku::Backtrack(Cell* cellIn) {
 		}
 		else {
 			EmptyCell(cellIn);
-			path[estimateDepth - 1].pop_back();
-			it = path[estimateDepth - 1].end();
+			path[long long (estimateDepth) - 1].pop_back();
+			it = path[long long (estimateDepth) - 1].end();
 			it -= 1;
 			Cell* cellPtr = *it;
 			Backtrack(cellPtr);
