@@ -28,6 +28,10 @@ public:
 
 
 	Sudoku(char input[9][9]);
+	bool GridChecker(char gridIn[9][9]);
+	//disable copying 
+	Sudoku(const Sudoku& other) = delete;
+
 	//prints sudoku
 	void PrintSudoku();
 

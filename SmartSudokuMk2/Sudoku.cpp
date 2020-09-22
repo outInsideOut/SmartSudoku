@@ -2,15 +2,45 @@
 
 
 Sudoku::Sudoku(char input[9][9]) {
-
+	try {
+		if (!GridChecker(input)) {
+			throw(ImpossiblePuzzleException("Duplicate value in grid"));
+		}
+	}
+	catch (ImpossiblePuzzleException& e) {
+		//msg = " duplicate in row, col or 3x3 "
+		//print exception message
+		std::cout << e.getMessage() << std::endl;
+		//exit program
+		std::cout << std::endl << "exiting program" << std::endl;
+		exit(0);
+	}
 	for (short i = 0; i < 9; i++) {
 
 		for (short j = 0; j < 9; j++) {
 
 			//pointer to cell object
 			Cell* currCell = &grid[i][j];
-			//set grid Cell's value to the inputted Grid's value at the same index
-			currCell->value = input[i][j];
+
+			try {
+				//if ! ('0' <= char <= '9') 
+				if (input[i][j] < 48 || input[i][j] > 57) {
+					//create message string for exception
+					std::string errorCode = "Invalid character in input grid at (" + std::to_string(j) + ", " + std::to_string(i) + ")";
+					//throw exception
+					throw (InputException(errorCode));
+				}
+				//set grid Cell's value to the inputted Grid's value at the same index
+				currCell->value = input[i][j];
+			} 
+			catch (InputException& e) {
+				//print exception message
+				std::cout << e.getMessage() << std::endl;
+				//exit program
+				std::cout << std::endl << "exiting program" << std::endl;
+				exit(0);
+			}
+
 			//if value isn't 0 it will be a constant vbalue so cell's locked == true
 			if (input[i][j] != '0') {
 				currCell->Lock();
@@ -54,6 +84,81 @@ Sudoku::Sudoku(char input[9][9]) {
 	solved = false;
 }
 
+bool Sudoku::GridChecker(char gridIn[][9]) {
+	short x = 0;
+	short y = 0;
+	//pattern repeats in 3s, 3 times
+	for (short i = 0; i < 3; i++) {
+		for (short j = 0; j < 3; j++) {
+			
+			char val;
+
+			//CheckRow
+			std::vector<char>* tmpList = new std::vector<char>;
+			for (int z = 0; z < 9; z++) {
+				
+				val = gridIn[y][z];
+				if (val != '0') {
+					if (Is_x_Possible(tmpList, &val)) {
+						tmpList->push_back(val);
+					}
+					else {
+						return false;
+					}
+				}
+				
+			}
+			tmpList->clear();
+			//CheckCol
+			
+			for (int z = 0; z < 9; z++) {
+				
+				val = gridIn[z][x];
+				if (val != '0') {
+					if (Is_x_Possible(tmpList, &val)) {
+						tmpList->push_back(val);
+					}
+					else {
+						return false;
+					}
+				}
+				
+			}
+			tmpList->clear();
+
+			//get 3x3 starting point for the cell passed
+			short  rowStart = y - (y % 3);
+			short  colStart = x - (x % 3);
+
+			
+			//loop through all cells in  3x3
+			for (short rowIndex = rowStart; rowIndex < (rowStart + 3); rowIndex++) {
+				for (short colIndex = colStart; colIndex < (colStart + 3); colIndex++) {
+					//if the cell is still unsolved
+					
+					val = gridIn[colIndex][rowIndex];
+					if (val != '0') {
+						if (Is_x_Possible(tmpList, &val)) {
+							tmpList->push_back(val);
+						}
+						else {
+							return false;
+						}
+					}
+					
+				}
+			}
+			delete tmpList;
+			x += 3;
+			y++;
+		}
+		x -= 8;
+	}
+	
+	return true;
+
+}
+
 void Sudoku::SolveInit() {
 	//fill vectors for all cells, rows, cols and 3x3s
 	FindImpossibleValues();
@@ -80,6 +185,7 @@ void Sudoku::SolveInit() {
 	}
 	PrintSudoku();
 }
+
 void Sudoku::PrintSudoku() {
 	for (short i = 0; i < 9; i++) {
 		if (i % 3 == 0) {
@@ -115,6 +221,10 @@ bool Sudoku::CheckComplete()
 }
 
 void Sudoku::FillCell(Cell* cellIn, char c) {
+
+	if (c == '0') {
+		int a = 1;
+	}
 	//if a cell is trying to be filled but all possible values are tried
 	if (cellIn->impossibleValues.size() == 9) {
 		//Backtrack
@@ -522,51 +632,66 @@ void Sudoku::Estimate(Cell* c) {
 
 void Sudoku::Backtrack(Cell* cellIn) {
 	std::vector<Cell*>::iterator it;
+	try {
+		if (cellIn->value == '0') {
+			EmptyCell(cellIn);
+			it = path[long long(estimateDepth) - 1].end();
+			it -= 1;
 
-	if (cellIn->value == '0') {
-		EmptyCell(cellIn);
-		it = path[long long (estimateDepth) - 1].end();
-		it -= 1;
-		Cell* cellPtr = *it;
-		Backtrack(cellPtr);
-		return;
-	} 
-	else {
-		if (cellIn->estimate) {
-			
-			//if there are more values to put in
-			if (cellIn->impossibleValues.size() < 9) {
-				//put in another estimate
+			Cell* cellPtr = *it;
+			Backtrack(cellPtr);
+			return;
+		}
+		else {
+			if (cellIn->estimate) {
+				if (estimateDepth == 9) {
+					//...
+					int i = 1;
+				}
+				//if there are more values to put in
+				if (cellIn->impossibleValues.size() < 9) {
+					//put in another estimate
 
-				cellIn->value = '0';
-				path.pop_back();
-				estimateDepth -= 1;
-				Estimate(cellIn);
-				return;
+					cellIn->value = '0';
+					path.pop_back();
+					estimateDepth -= 1;
+					Estimate(cellIn);
+					return;
+				}
+				else {
+					if (path.size() == 1) {
+						//throw impossiblePuzzle exception
+						throw (ImpossiblePuzzleException("Estimation options are exhausted!"));
+					}
+					EmptyCell(cellIn);
+					path.pop_back();
+					estimateDepth -= 1;
+					it = path[long long(estimateDepth) - 1].end();
+					it -= 1;
+					Cell* cellPtr = *it;
+					Backtrack(cellPtr);
+					return;
+
+					
+				}
 			}
 			else {
-				if (path.size() == 1) {
-					//throw impossiblePuzzle exception
-				}
 				EmptyCell(cellIn);
-				path.pop_back();
-				estimateDepth -= 1;
-				it = path[long long (estimateDepth) - 1].end();
+				path[long long(estimateDepth) - 1].pop_back();
+				it = path[long long(estimateDepth) - 1].end();
 				it -= 1;
 				Cell* cellPtr = *it;
 				Backtrack(cellPtr);
 				return;
 			}
 		}
-		else {
-			EmptyCell(cellIn);
-			path[long long (estimateDepth) - 1].pop_back();
-			it = path[long long (estimateDepth) - 1].end();
-			it -= 1;
-			Cell* cellPtr = *it;
-			Backtrack(cellPtr);
-			return;
-		}
+	}
+	catch (ImpossiblePuzzleException& e) {
+		//print exception message
+		std::cout << e.getMessage() << std::endl;
+		//exit program
+		std::cout << std::endl << "exiting program" << std::endl;
+		exit(0);
 	}
 
 }

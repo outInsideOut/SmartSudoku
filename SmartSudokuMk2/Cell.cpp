@@ -49,11 +49,15 @@ void Cell::Fill(char valueIn) {
 			value = valueIn;
 		}
 		else {
-			/*throw new exception;*/
+			std::string msg = "(" + std::to_string(x) + ", " + std::to_string(y) + " )\n" ;
+			throw(UnaccessableCellException(msg));
 		}
 	}
-	catch (std::exception e) {
-		std::cout << "ERROR:\t Attempt made to change locked cell @(" << x << ", " << y << ")";
+	catch (UnaccessableCellException& e) {
+		e.getMessage();
+		std::cout << "\n\nPlease report error and Sudoku Puzzle's input values to \'fionnoconnor.dev@gmail.com\'\n program now exiting";
+		exit(0);
+
 	}
 }
 
@@ -64,6 +68,7 @@ char Cell::FindPossibleValue() {
 			return x;
 		x++;
 	}
+	return NULL;
 }
 
 //locks Cell

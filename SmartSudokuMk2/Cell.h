@@ -1,11 +1,13 @@
 #pragma once
 #include <vector>
 #include <iostream>
-
+#include "Exception.h"
 class Cell
 {
 public:
 	Cell();
+	//disable copying
+	Cell(const Cell& other) = delete;
 	void SetX(short* xIn);
 	void SetY(short* yIn);
 	short* getX();

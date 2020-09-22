@@ -95,6 +95,10 @@ All logic within the program is well commented in the C++ code, these flowcharts
 
 ## Version Control
 
+### v 1.0.2
+
+Exception handling classes and try-catches added. CheckGrid() function also created to check the inputted array on construction of the Sudoku object.
+
 ### v 1.0.1
 
 Some automatic casting written into the program. e.g:
