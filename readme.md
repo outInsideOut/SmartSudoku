@@ -55,7 +55,7 @@ This source file will solve the puzzle "evilArr" and print the solved puzzle to 
 ## Solution Structure
 This solution contains two classes, Sudoku and Cell. 
 ### <h3 style="text-align:center">UML</h3>
-<a style="padding-left:calc(50% - 180px)" data-flickr-embed="true" href="https://www.flickr.com/photos/190027932@N07/50314799043/in/dateposted-public/" title="SudokuUML"><img src="https://live.staticflickr.com/65535/50314799043_a79e8afa1d_b.jpg" width="365" height="1024" alt="SudokuUML"></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>))
+<a style="padding-left:calc(50% - 180px)" data-flickr-embed="true" href="https://www.flickr.com/photos/190027932@N07/50314799043/in/dateposted-public/" title="SudokuUML"><img src="https://live.staticflickr.com/65535/50314799043_a79e8afa1d_b.jpg" width="365" height="1024" alt="SudokuUML"></a>
 
 ### Data 
 There are some complicated and unique data structures inside these classes that it is imperitve to understand before one can understand the workings of the program.
