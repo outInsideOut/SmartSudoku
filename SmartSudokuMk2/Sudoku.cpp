@@ -49,29 +49,8 @@ Sudoku::Sudoku(char input[9][9]) {
 			currCell->SetY(&i); //y coord
 			currCell->SetX(&j);//x coord
 
-			short rowStart;
-			//set cell's 3x3 index
-			//there is some simple calculations and conditions here to work out the 3x3 index
-			if (i >= 0 && i < 3) {
-				rowStart = 0;
-			}
-			else if (i >= 3 && i < 6) {
-				rowStart = 3;
-			}
-			else {
-				rowStart = 6;
-			}
-			short col;
-			if (j >= 0 && j < 3) {
-				col = 0;
-			}
-			else if (j >= 3 && j < 6) {
-				col = 1;
-			}
-			else {
-				col = 2;
-			}
-			short ThreesIndex = rowStart + col;
+			short ThreesIndex = getThreesIndex(i,j);
+
 			currCell->setThreex3Index(&ThreesIndex);
 
 			//Cell* smallestOptions is consciously left uninitialised
@@ -83,7 +62,31 @@ Sudoku::Sudoku(char input[9][9]) {
 	}
 	solved = false;
 }
-
+short getThreesIndex(short i, short j) {
+	short rowStart;
+	//set cell's 3x3 index
+	//there is some simple calculations and conditions here to work out the 3x3 index
+	if (i >= 0 && i < 3) {
+		rowStart = 0;
+	}
+	else if (i >= 3 && i < 6) {
+		rowStart = 3;
+	}
+	else {
+		rowStart = 6;
+	}
+	short col;
+	if (j >= 0 && j < 3) {
+		col = 0;
+	}
+	else if (j >= 3 && j < 6) {
+		col = 1;
+	}
+	else {
+		col = 2;
+	}
+	return rowStart + col;
+}
 bool Sudoku::GridChecker(char gridIn[][9]) {
 	short x = 0;
 	short y = 0;
@@ -557,7 +560,7 @@ Cell* Sudoku::FindEmptyInRow(short* rowIndex) {
 //finds empty cell in column
 Cell* Sudoku::FindEmptyInCol(short* colIndex) {
 	for (short i = 0; i < 9; i++) {
-		char value = grid[i][*colIndex].value;
+		char value = grid[i][*colIndex]long.value;
 		if (value == '0') {
 			return &grid[i][*colIndex];
 		}
