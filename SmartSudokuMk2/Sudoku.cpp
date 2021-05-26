@@ -1,5 +1,5 @@
 #include "Sudoku.h"
-
+#include <cmath>
 
 Sudoku::Sudoku(char input[9][9]) {
 	try {
@@ -63,28 +63,11 @@ Sudoku::Sudoku(char input[9][9]) {
 	solved = false;
 }
 short getThreesIndex(short i, short j) {
-	short rowStart;
 	//set cell's 3x3 index
 	//there is some simple calculations and conditions here to work out the 3x3 index
-	if (i >= 0 && i < 3) {
-		rowStart = 0;
-	}
-	else if (i >= 3 && i < 6) {
-		rowStart = 3;
-	}
-	else {
-		rowStart = 6;
-	}
-	short col;
-	if (j >= 0 && j < 3) {
-		col = 0;
-	}
-	else if (j >= 3 && j < 6) {
-		col = 1;
-	}
-	else {
-		col = 2;
-	}
+	short rowStart = std::floor(i / 3) * 3;
+	short col = std::floor(j / 3);
+
 	return rowStart + col;
 }
 bool Sudoku::GridChecker(char gridIn[][9]) {
@@ -492,7 +475,9 @@ Cell* Sudoku::FindNextCell() {
 	return nullptr;
 
 }
-
+short getLocalIndex(short i) {
+	return i - (i % 3);
+}
 void Sudoku::Check3x3(Cell* cellIn) {
 	//get cell's coordinates
 	short* cellX = cellIn->getX();
